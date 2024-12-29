@@ -1,0 +1,17 @@
+[tool.poetry]
+name = "proxy-cycling-webdriver"
+version = "1.0.0"
+description = "Selenium webdriver that will dynamically cycle given proxies when making requests"
+authors = ["Daryl Stronge <darylkstronge@gmail.com>"]
+license = "MIT"
+readme = "README.md"
+packages = [{ include = "proxy-cycling-webdriver"}]
+
+[tool.poetry.dependencies]
+python = "^3.7"
+selenium-wire = "^5.1.0"
+
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
