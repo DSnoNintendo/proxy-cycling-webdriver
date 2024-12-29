@@ -5,7 +5,7 @@ description = "Selenium webdriver that will dynamically cycle given proxies when
 authors = ["Daryl Stronge <darylkstronge@gmail.com>"]
 license = "MIT"
 readme = "README.md"
-packages = [{ include = "proxy-cycling-webdriver"}]
+packages = [{ include = "proxy_cycling_webdriver"}]
 
 [tool.poetry.dependencies]
 python = "^3.7"
