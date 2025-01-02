@@ -48,9 +48,12 @@ class WebDriver(Chrome):
                 if proxy not in self.proxy_cycle:
                     self.current_proxy = proxy
 
-        self.update_driver_proxy(self.current_proxy)
+        self._update_driver_proxy(self.current_proxy)
 
-    def update_driver_proxy(self, proxy: str):
+    def add_proxy(self, proxy: str):
+        self.proxies.add(proxy)
+
+    def _update_driver_proxy(self, proxy: str):
         self.proxy = {
                     "http": proxy,
                     "https": proxy,
