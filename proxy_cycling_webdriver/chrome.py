@@ -3,7 +3,9 @@ from seleniumwire.webdriver import Chrome
 
 
 class WebDriver(Chrome):
-    def __init__(self, *args, proxies: List[str] = [], **kwargs):
+    def __init__(self, *args, proxies=None, **kwargs):
+        if proxies is None:
+            proxies = []
         self.proxies = set(proxies) if proxies else set()
         self.proxy_cycle = set()
         self.current_proxy = None
