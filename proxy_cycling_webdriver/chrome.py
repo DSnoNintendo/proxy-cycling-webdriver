@@ -33,7 +33,7 @@ class WebDriver(Chrome):
         super().__init__(*args, **kwargs, seleniumwire_options=options)
 
     def cycle_proxies(self):
-        if len(self.proxies):
+        if len(self.proxies) == 0:
             raise AttributeError("No proxies supplied. Cannot cycle.")
         if len(self.proxies) == 1:
             self.current_proxy = self.proxies.pop()

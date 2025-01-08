@@ -3,7 +3,9 @@ from seleniumwire.webdriver import Edge
 
 
 class WebDriver(Edge):
-    def __init__(self, *args, proxies: List[str] = None, **kwargs):
+    def __init__(self, *args, proxies=None, **kwargs):
+        if proxies is None:
+            proxies = []
         self.proxies = set(proxies) if proxies else set()
         self.proxy_cycle = set()
         self.current_proxy = None
@@ -31,7 +33,7 @@ class WebDriver(Edge):
         super().__init__(*args, **kwargs, seleniumwire_options=options)
 
     def cycle_proxies(self):
-        if len(self.proxies):
+        if len(self.proxies) == 0:
             raise AttributeError("No proxies supplied. Cannot cycle.")
         if len(self.proxies) == 1:
             self.current_proxy = self.proxies.pop()
@@ -48,11 +50,14 @@ class WebDriver(Edge):
                 if proxy not in self.proxy_cycle:
                     self.current_proxy = proxy
 
-        self.update_driver_proxy(self.current_proxy)
+        self._update_driver_proxy(self.current_proxy)
 
-    def update_driver_proxy(self, proxy: str):
+    def add_proxy(self, proxy: str):
+        self.proxies.add(proxy)
+
+    def _update_driver_proxy(self, proxy: str):
         self.proxy = {
-                    "http": proxy,
-                    "https": proxy,
+            "http": proxy,
+            "https": proxy,
         }
         self.proxy_cycle.add(proxy)
